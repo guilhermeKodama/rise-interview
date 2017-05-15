@@ -12,8 +12,8 @@ body {
   padding-right: 12px;
 }
 
-.card-header {
-
+.card-inside {
+  background-color: #e8e8e8;
 }
 
 .deleteButton {

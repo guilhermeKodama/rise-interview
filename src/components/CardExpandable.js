@@ -22,25 +22,26 @@ class CardExpandable extends Component {
     const { post } =  this.props
     return (
       <div>
-      {
-        post.isExpanded?
-          <div onClick={() => this.props.deletePost(post)} className='deleteButton'> <ActionDelete /> </div>
-          : <p/>
-      }
-      <Card className='card' onExpandChange={(expanded) => this.props.onExpanded(expanded, post)}>
-        <CardHeader
-          title={post.title}
-          subtitle='Subtitle'
-          actAsExpander={true}
-          showExpandableButton={true}
-          className='card-header'
-        >
-        </CardHeader>
-        <CardText expandable={true}> {post.body} </CardText>
-        <List expandable={true}>
-          { post.comments? post.comments.map(this.renderComment) : false }
-        </List>
-      </Card>
+        {
+          post.isExpanded?
+            <div onClick={() => this.props.deletePost(post)} className='deleteButton'> <ActionDelete /> </div>
+            : <p/>
+        }
+        <Card className='card' onExpandChange={(expanded) => this.props.onExpanded(expanded, post)}>
+          <CardHeader
+            title={post.title}
+            subtitle='Subtitle'
+            actAsExpander={true}
+            showExpandableButton={true}
+            className='card-header'
+          />
+          <div className='card-inside' expandable={true}>
+            <CardText expandable={true}> {post.body} </CardText>
+            <List expandable={true}>
+              { post.comments? post.comments.map(this.renderComment) : false }
+            </List>
+          </div>
+        </Card>
       </div>
     )
   }
