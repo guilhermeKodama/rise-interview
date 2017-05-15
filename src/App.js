@@ -36,6 +36,22 @@ class App extends Component {
     this.setState({ title: 'Title', posts: posts })
   }
 
+  addComment(post, comment) {
+    const posts = this.state.posts.slice()
+    const i =  this.getPostIndex(posts, post)
+    const p = posts[i]
+    if(p.comments === undefined) {p.comments = []}//check if is undefined
+    p.comments.push({
+        postId: post.postId,
+        id: p.comments.length > 0? (p.comments[p.comments.length-1].id + 1) : 0,
+        name: 'Guilherme Kodama',
+        email: 'guilherme.kodama@gmail.com',
+        body: comment
+      })
+    posts[i] = p
+    this.setState({ posts: posts })
+  }
+
   getComments(expanded, post) {
     const i = this.getPostIndex(this.state.posts, post)
     const posts = this.state.posts.slice()
@@ -90,6 +106,7 @@ class App extends Component {
                         setTitle={this.setTitle.bind(this)}
                         deletePost={this.deletePost.bind(this)}
                         onExpanded={this.getComments.bind(this)}
+                        addComment={this.addComment.bind(this)}
                         isExpanded={post.isExpanded}
                         />
             })}
