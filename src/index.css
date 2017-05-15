@@ -16,6 +16,11 @@ body {
   background-color: #e8e8e8;
 }
 
+.text-field-comment-parent {
+  display: flex;
+  align-content: center;
+}
+
 .deleteButton {
   display: inline-block;
   position: absolute;
