@@ -1,69 +1,13 @@
 import React, { Component } from 'react'
 import AppBar from 'material-ui/AppBar';
-import {Card, CardHeader, CardText} from 'material-ui/Card'
-import {List, ListItem} from 'material-ui/List'
-import ActionDelete from 'material-ui/svg-icons/action/delete';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import axios from 'axios'
+import CardExpandable from './components/CardExpandable'
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin()
-
-class Comment extends Component {
-  render() {
-    const { comment } = this.props
-    return (
-      <Card className='card'>
-        <CardHeader title={comment.name} />
-        <CardText> {comment.body} </CardText>
-      </Card>
-    )
-  }
-}
-
-class CardExpandable extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      comments: props.post.comments || []
-    }
-  }
-
-  renderComment(comment, i) {
-    return (
-      <ListItem key={comment.id}> <Comment comment={comment}/> </ListItem>
-    )
-  }
-
-  render() {
-    const { post } =  this.props
-    return (
-      <div>
-      {
-        post.isExpanded?
-          <div onClick={() => this.props.deletePost(post)} className='deleteButton'> <ActionDelete /> </div>
-          : <p/>
-      }
-      <Card className='card' onExpandChange={(expanded) => this.props.onExpanded(expanded, post)}>
-        <CardHeader
-          title={post.title}
-          subtitle='Subtitle'
-          actAsExpander={true}
-          showExpandableButton={true}
-          className='card-header'
-        >
-        </CardHeader>
-        <CardText expandable={true}> {post.body} </CardText>
-        <List expandable={true}>
-          { post.comments? post.comments.map(this.renderComment) : false }
-        </List>
-      </Card>
-      </div>
-    )
-  }
-}
 
 class App extends Component {
   constructor() {
@@ -156,4 +100,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App
